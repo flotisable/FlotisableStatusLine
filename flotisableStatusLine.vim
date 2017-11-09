@@ -10,9 +10,7 @@ if !exists("s:flotisableStatusLine")
 
   function HasGit()
   "
-    call system('git --version')
-    let hasGit = system('$?')
-    return ( hasGit == 0 )
+    return executable('git')
   "
   endfunction
 "
