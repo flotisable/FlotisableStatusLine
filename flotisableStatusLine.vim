@@ -8,9 +8,14 @@ if !exists("s:flotisableStatusLine")
   "
   endfunction
 
-  function HasGit()
+  function GitBranch()
   "
-    return executable('git')
+    if executable('git')
+      if isdirectory('.git')
+        return system('git branch | grep ''*'' | cut -d'' '' -f2')
+    endif
+
+    return ''
   "
   endfunction
 "
