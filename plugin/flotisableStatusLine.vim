@@ -1,13 +1,17 @@
-if !exists("g:loaded_flotisableStatusLine")
+if !exists('g:loaded_flotisableStatusLine')
 "
   let g:loaded_flotisableStatusLine = 1 " set flag to indicate the script is loaded
 
   " status line field color settings
-  highlight User1 cterm=bold  ctermfg=Green     ctermbg=DarkRed   " git branch field color
-  highlight User2 cterm=bold  ctermfg=Blue      ctermbg=Brown     " flag field color
-  highlight User3 cterm=bold  ctermfg=DarkGray  ctermbg=Gray      " file name field color
-  highlight User4 cterm=bold  ctermfg=Yellow    ctermbg=DarkGreen " cursor position field color
-  highlight User5 cterm=bold  ctermfg=White     ctermbg=DarkCyan  " time field color
+  if !exists('g:flotisableStatusLineCustomColor')
+  "
+    highlight User1 cterm=bold  ctermfg=Green     ctermbg=DarkRed   " git branch field color
+    highlight User2 cterm=bold  ctermfg=Blue      ctermbg=Brown     " flag field color
+    highlight User3 cterm=bold  ctermfg=DarkGray  ctermbg=Gray      " file name field color
+    highlight User4 cterm=bold  ctermfg=Yellow    ctermbg=DarkGreen " cursor position field color
+    highlight User5 cterm=bold  ctermfg=White     ctermbg=DarkCyan  " time field color
+  "
+  endif
   " end status line field color settings
 
   " get the system date information
@@ -23,7 +27,9 @@ if !exists("g:loaded_flotisableStatusLine")
   "
     if executable('git')
       if isdirectory('.git')
-        return substitute( system('git branch | grep ''*'' | cut -d'' '' -f2'), '[[:cntrl:]]', '', 'g' )
+        let gitBranch = system('git branch')
+        let gitBranch = matchlist(gitBranch, '* \([[:alnum:]]\+\)')
+        return gitBranch[1]
     endif
 
     return ''
