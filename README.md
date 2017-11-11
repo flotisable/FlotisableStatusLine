@@ -1,6 +1,8 @@
 # Flotisable Status Line
 a self use plugin to set up the status line fo vim
 
+[Traditional Chinese README](README_zh-TW.md)
+
 # Screenshot
 ![screenshot](screenshot.png)
 
@@ -29,7 +31,7 @@ this field shows the vim flag in the following order
 
 this field shows the file name relative to the present working directory
 
-## Cursor Line Field
+## Cursor Position Field
 
 this field shows the cursor position with the following format
 
