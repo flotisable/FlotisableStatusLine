@@ -11,7 +11,7 @@ if !exists("g:loaded_flotisableStatusLine")
   " get the system date information
   function FlotisableDate()
   "
-    return system('date "+%p %H:%M"')
+    return substitute( system('date "+%p %H:%M"'), '[[:cntrl:]]', '', 'g' )
   "
   endfunction
 
@@ -20,7 +20,7 @@ if !exists("g:loaded_flotisableStatusLine")
   "
     if executable('git')
       if isdirectory('.git')
-        return system('git branch | grep ''*'' | cut -d'' '' -f2')
+        return substitute( system('git branch | grep ''*'' | cut -d'' '' -f2'), '[[:cntrl:]]', '', 'g' )
     endif
 
     return ''
