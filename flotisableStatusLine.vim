@@ -30,12 +30,12 @@ if !exists("g:loaded_flotisableStatusLine")
   " set the status line
   function FlotisableStatusLine()
   "
-    let statusLine =  '%1*%{FlotisableGitBranch()}'
-    let statusLine .= ' %2*%w%h%r%m %y'
-    let statusLine .= ' %3*%f'
+    let statusLine =  '%1* %{FlotisableGitBranch()} '
+    let statusLine .= '%2* %w%h%r%m %y '
+    let statusLine .= '%3* %f '
     let statusLine .= '%='
-    let statusLine .= '%4*%l,%c %P'
-    let statusLine .= ' %5*%{FlotisableDate()}'
+    let statusLine .= '%4* %.5l,%-.5c %P '
+    let statusLine .= '%5* %{FlotisableDate()} '
 
     return statusLine
   "
