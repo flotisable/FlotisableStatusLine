@@ -2,7 +2,7 @@
 a self use plugin to set up the status line fo vim
 
 # Screenshot
-[screenshot](screenshot.png)
+![screenshot](screenshot.png)
 
 # Statusline Field
 I seperate the statusline into five filed, and each field can be set to different color
