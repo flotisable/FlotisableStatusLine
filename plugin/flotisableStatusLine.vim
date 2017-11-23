@@ -37,7 +37,12 @@ if !exists('g:loaded_flotisableStatusLine')
   "
     if executable('git')
       if isdirectory('.git')
-        return matchlist( system('git branch'), '* \([[:alnum:]]\+\|(.*)\)')[1]
+        let gitBranch = system('git branch')
+        if strchars( gitBranch ) == 0
+          return ''
+        endif
+        return matchlist( gitBranch, '* \([[:alnum:]]\+\|(.*)\)')[1]
+      endif
     endif
 
     return ''
