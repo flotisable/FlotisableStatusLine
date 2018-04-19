@@ -41,7 +41,7 @@ if !exists('g:loaded_flotisableStatusLine')
         if strchars( gitBranch ) == 0
           return ''
         endif
-        return matchlist( gitBranch, '* \([[:alnum:]]\+\|(.*)\)')[1]
+        return matchlist( gitBranch, '\* \W*\([[:alnum:]]\+\|(.*)\)')[1]
       endif
     endif
 
