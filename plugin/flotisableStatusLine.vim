@@ -27,7 +27,7 @@ if !exists('g:loaded_flotisableStatusLine')
   " get the system date information
   function FlotisableDate()
   "
-    return substitute( system('date "+%p %H:%M"'), '[[:cntrl:]]', '', 'g' )
+    return strftime("%p %H:%M")
   "
   endfunction
   " end get the system date information
