@@ -36,13 +36,25 @@ if !exists('g:loaded_flotisableStatusLine')
   function FlotisableGitBranch()
   "
     if executable('git')
+    "
       if isdirectory('.git')
+      "
         let gitBranch = system('git branch')
+
         if strchars( gitBranch ) == 0
           return ''
         endif
-        return matchlist( gitBranch, '\* \W*\([[:alnum:]]\+\|(.*)\)')[1]
+
+        let submatches = matchlist( gitBranch, '\* \W*\([[:alnum:]]\+\|(.*)\)')
+
+        if len( submatches ) < 2 " no submatch
+          return ''
+        endif
+
+        return submatches[1]
+      "
       endif
+    "
     endif
 
     return ''
