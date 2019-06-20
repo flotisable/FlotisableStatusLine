@@ -69,12 +69,12 @@ if !exists('g:loaded_flotisableStatusLine')
   " set the status line
   function FlotisableStatusLine()
   "
-    let statusLine =  '%1* %{FlotisableGitBranch()} ' " git branch field
-    let statusLine .= '%2* %w%h%r%m %y '              " flag field
-    let statusLine .= '%3* %f '                       " file name field
-    let statusLine .= '%='                            " seperate defferent alignment
-    let statusLine .= '%4* %.5l,%-.5c %P '            " cursor position field
-    let statusLine .= '%5* %{FlotisableDate()} '      " time field
+    let statusLine =  '%1* %{FlotisableGitBranch()} '     " git branch field
+    let statusLine .= '%2* %w%h%r%m %y [%{&fileformat}]'  " flag field
+    let statusLine .= '%3* %f '                           " file name field
+    let statusLine .= '%='                                " seperate defferent alignment
+    let statusLine .= '%4* %.5l,%-.5c %P '                " cursor position field
+    let statusLine .= '%5* %{FlotisableDate()} '          " time field
 
     return statusLine
   "
