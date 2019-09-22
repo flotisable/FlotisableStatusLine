@@ -39,24 +39,20 @@ if !exists('g:loaded_flotisableStatusLine')
   " get the current git branch
   function FlotisableGitBranch()
   "
-    if executable('git')
+    if executable('git') && isdirectory('.git') && filereadable('.git/HEAD')
     "
-      if isdirectory('.git')
-      "
-        let gitBranch = system('git branch')
+      let gitBranch = readfile('.git/HEAD', '', 1)[0]
 
-        if strchars( gitBranch ) == 0
-          return ''
-        endif
+      if strchars( gitBranch ) == 0
+        return ''
+      endif
 
-        let submatches = matchlist( gitBranch, '\* \W*\([[:alnum:]]\+\|(.*)\)')
+      let submatches = matchlist( gitBranch, 'refs/heads/\(.*\)' )
 
-        if len( submatches ) < 2 " no submatch
-          return ''
-        endif
-
+      if len( submatches ) < 2 " no submatch
+        return gitBranch
+      else
         return submatches[1]
-      "
       endif
     "
     endif
