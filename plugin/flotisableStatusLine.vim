@@ -20,7 +20,7 @@ if !exists('g:loaded_flotisableStatusLine')
       highlight User2 gui=bold  guifg='DarkCyan'  guibg='Orange'    " flag field color
       highlight User3 gui=bold  guifg='Gray'      guibg='LightGray' " file name field color
       highlight User4 gui=bold  guifg='Yellow'    guibg='DarkGreen' " cursor position field color
-      highlight User5 gui=bold  guifg='White'     guibg='Cyan'      " time field color
+      highlight User5 gui=bold  guifg='White'     guibg=#00BFFF     " time field color
       " end gui color settings
     "
     endif
