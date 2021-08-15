@@ -1,4 +1,4 @@
-if exists('g:loaded_flotisableStatusLine')
+if exists( 'g:loaded_flotisableStatusLine' )
   finish
 endif
 
@@ -65,8 +65,20 @@ endfunction
 " set the status line
 function! FlotisableStatusLine()
 "
+  " file name + cursor position + time fields width
+  let l:rightFieldMinWidth  = strwidth( expand( '%:t' ) ) + 21
+  let l:windowWidth         = getwininfo( win_getid() )[0].width
+
   let statusLine =  '%1* %{FlotisableGitBranch()} '     " git branch field
   let statusLine .= '%2* %w%h%r%m %y [%{&fileformat}]'  " flag field
+
+  " truncate file name field if there is enough space
+  if l:windowWidth > l:rightFieldMinWidth
+  "
+    let statusLine .= '%<'                              " file name field
+  "
+  endif
+
   let statusLine .= '%3* %f '                           " file name field
   let statusLine .= '%='                                " seperate defferent alignment
   let statusLine .= '%4* %.5l,%-.5c %P '                " cursor position field
