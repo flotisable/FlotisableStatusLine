@@ -67,7 +67,7 @@ function! FlotisableStatusLine()
 "
   " file name + cursor position + time fields width
   let l:rightFieldMinWidth  = strwidth( expand( '%:t' ) ) + 21
-  let l:windowWidth         = getwininfo( win_getid() )[0].width
+  let l:windowWidth         = winwidth( 0 )
 
   let statusLine =  '%1* %{FlotisableGitBranch()} '     " git branch field
   let statusLine .= '%2* %w%h%r%m %y [%{&fileformat}]'  " flag field
