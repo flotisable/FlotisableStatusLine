@@ -5,7 +5,7 @@ endif
 let g:loaded_flotisableStatusLine = 1 " set flag to indicate the script is loaded
 
 " status line field color settings
-function! FlotisableHighlight()
+function! s:FlotisableHighlight()
 "
   if exists( 'g:flotisableStatusLineCustomColor' )
     return
@@ -91,6 +91,6 @@ endfunction
 
 set statusline=%!FlotisableStatusLine() " set status line
 
-call FlotisableHighlight()
+call s:FlotisableHighlight()
 
-autocmd ColorScheme * call FlotisableHighlight()
+autocmd ColorScheme * call s:FlotisableHighlight()
