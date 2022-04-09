@@ -22,8 +22,8 @@ I seperate the statusline into five fields, and each field can be set to differe
 
 ## Git Branch Field
 This field shows the branch of git repository for the current working directory.
-It is based on the **.git** directory layout,
-so if there is no **.git** directory the field will be empty.
+It is based on the data in `.git` repo directory,
+so if there is no `.git` repo directory, the field will be empty.
 It is removed for non-focused window
 
 ## Flag Field
@@ -38,7 +38,8 @@ This field shows the vim flags in the following order
 It will fade out for non-focused window
 
 ## File Name Field
-This field shows the file name relative to the current working directory
+This field shows the file name relative to the current working directory.
+It will be truncated when there is no enough space for the fields on the right.
 
 ## Cursor Position Field
 This field shows the cursor position with the following format
