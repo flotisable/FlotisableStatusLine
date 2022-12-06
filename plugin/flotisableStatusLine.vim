@@ -41,23 +41,20 @@ endfunction
 " get the current git branch
 function! FlotisableGitBranch()
 "
-  if !executable('git') || !isdirectory('.git') || !filereadable('.git/HEAD')
+  try
+
+    let gitBranch   = readfile('.git/HEAD', '', 1)[0]
+    let submatches  = matchlist( gitBranch, 'refs/heads/\(.*\)' )
+
+    if len( submatches ) < 2 " no submatch
+      return gitBranch
+    else
+      return submatches[1]
+    endif
+
+  catch
     return ''
-  endif
-
-  let gitBranch = readfile('.git/HEAD', '', 1)[0]
-
-  if strchars( gitBranch ) == 0
-    return ''
-  endif
-
-  let submatches = matchlist( gitBranch, 'refs/heads/\(.*\)' )
-
-  if len( submatches ) < 2 " no submatch
-    return gitBranch
-  else
-    return submatches[1]
-  endif
+  endtry
 "
 endfunction
 " end get the current git branch
