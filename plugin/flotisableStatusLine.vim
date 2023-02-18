@@ -12,21 +12,21 @@ function! s:FlotisableHighlight()
   endif
 
   " color terminal color settings
-  highlight User1 cterm=bold  ctermfg=Green     ctermbg=DarkRed   " git branch field color
-  highlight User2 cterm=bold  ctermfg=Blue      ctermbg=Brown     " flag field color
-  highlight User3 cterm=bold  ctermfg=DarkGray  ctermbg=Gray      " file name field color
-  highlight User4 cterm=bold  ctermfg=Yellow    ctermbg=DarkGreen " cursor position field color
-  highlight User5 cterm=bold  ctermfg=White     ctermbg=DarkCyan  " time field color
-  highlight User6 cterm=bold  ctermfg=Gray      ctermbg=Black     " faded field color
+  highlight FtStatusLineGitBranch       cterm=bold  ctermfg=Green     ctermbg=DarkRed
+  highlight FtStatusLineFlag            cterm=bold  ctermfg=Blue      ctermbg=Brown
+  highlight FtStatusLineFileName        cterm=bold  ctermfg=DarkGray  ctermbg=Gray
+  highlight FtStatusLineCursorPosition  cterm=bold  ctermfg=Yellow    ctermbg=DarkGreen
+  highlight FtStatusLineTime            cterm=bold  ctermfg=White     ctermbg=DarkCyan
+  highlight FtStatusLineFaded           cterm=bold  ctermfg=Gray      ctermbg=Black
   " end color terminal color settings
 
   " gui color settings
-  highlight User1 gui=bold  guifg=#35AD42     guibg='Red'       " git branch field color
-  highlight User2 gui=bold  guifg='DarkCyan'  guibg='Orange'    " flag field color
-  highlight User3 gui=bold  guifg='Gray'      guibg='LightGray' " file name field color
-  highlight User4 gui=bold  guifg='Yellow'    guibg='DarkGreen' " cursor position field color
-  highlight User5 gui=bold  guifg='White'     guibg=#00BFFF     " time field color
-  highlight User6 gui=bold  guifg='Gray'      guibg='Black'     " faded field color
+  highlight FtStatusLineGitBranch       gui=bold  guifg=#35AD42     guibg='Red'
+  highlight FtStatusLineFlag            gui=bold  guifg='DarkCyan'  guibg='Orange'
+  highlight FtStatusLineFileName        gui=bold  guifg='Gray'      guibg='LightGray'
+  highlight FtStatusLineCursorPosition  gui=bold  guifg='Yellow'    guibg='DarkGreen'
+  highlight FtStatusLineTime            gui=bold  guifg='White'     guibg=#00BFFF
+  highlight FtStatusLineFaded           gui=bold  guifg='Gray'      guibg='Black'
   " end gui color settings
 "
 endfunction
@@ -74,25 +74,42 @@ function! FlotisableStatusLine()
     let l:rightFieldMinWidth += l:timeFieldWidth
   endif
 
+  " git branch field
   if l:isFocusWindow
-    let l:statusLine .= '%1* %{FlotisableGitBranch()} '   " git branch field
+    let l:statusLine .= '%#FtStatusLineGitBranch#'
+    let l:statusLine .= ' %{FlotisableGitBranch()} '
   endif
 
-  let l:statusline .= ( l:isFocusWindow ) ? '%2*': '%6*'  " flag field
-  let l:statusLine .= ' %w%h%r%m %y [%{&fileformat}]'     " flag field
+  " flag field
+  if l:isFocusWindow
+    let l:statusLine .= '%#FtStatusLineFlag#'
+  else
+    let l:statusLine .= '%#FtStatusLineFaded#'
+  endif
+
+  let l:statusLine .= ' %w%h%r%m %y [%{&fileformat}]'
 
   " truncate file name field if there is enough space
   if l:windowWidth > l:rightFieldMinWidth
-    let l:statusLine .= '%<'                              " file name field
+    let l:statusLine .= '%<'                          " file name field
   endif
 
-  let l:statusLine .= '%3* %f '                           " file name field
-  let l:statusLine .= '%='                                " seperate defferent alignment
-  let l:statusline  = ( l:isFocusWindow ) ? '%4*': '%6*'  " cursor position field
-  let l:statusLine .= ' %.5l,%-.5c %P '                   " cursor position field
+  let l:statusLine .= '%#FtStatusLineFileName# %f '   " file name field
+  let l:statusLine .= '%='                            " seperate defferent alignment
 
+  " cursor position field
   if l:isFocusWindow
-    let l:statusLine .= '%5* %{FlotisableDate()} '        " time field
+    let l:statusLine .= '%#FtStatusLineCursorPosition#'
+  else
+    let l:statusLine .= '%#FtStatusLineFaded#'
+  endif
+
+  let l:statusLine .= ' %.5l,%-.5c %P '
+
+  " time field
+  if l:isFocusWindow
+    let l:statusLine .= '%#FtStatusLineTime#'
+    let l:statusLine .= ' %{FlotisableDate()} '
   endif
 
   return l:statusLine
@@ -100,7 +117,7 @@ function! FlotisableStatusLine()
 endfunction
 " end set the status line
 
-set statusline=%!FlotisableStatusLine() " set status line
+set statusline=%!FlotisableStatusLine()
 
 call s:FlotisableHighlight()
 
