@@ -32,9 +32,7 @@ endfunction
 
 " get the system date information
 function! FlotisableDate()
-"
   return strftime("%p %H:%M")
-"
 endfunction
 " end get the system date information
 
@@ -71,9 +69,7 @@ function! FlotisableStatusLine()
 
   " truncate file name field if there is enough space
   if l:windowWidth > l:rightFieldMinWidth
-  "
     let statusLine .= '%<'                              " file name field
-  "
   endif
 
   let statusLine .= '%3* %f '                           " file name field
