@@ -60,24 +60,46 @@ endfunction
 " set the status line
 function! FlotisableStatusLine()
 "
+  let l:isFocusWindow = ( g:statusline_winid == win_getid() )
+
   " file name + cursor position + time fields width
-  let l:rightFieldMinWidth  = strwidth( expand( '%:t' ) ) + 21
+  let l:cursorPositionWidth = 11
+  let l:timeFieldWidth      = 10
+  let l:rightFieldMinWidth  = strwidth( expand( '%:t' ) ) + l:cursorPositionWidth
   let l:windowWidth         = winwidth( 0 )
 
-  let statusLine =  '%1* %{FlotisableGitBranch()} '     " git branch field
-  let statusLine .= '%2* %w%h%r%m %y [%{&fileformat}]'  " flag field
+  if l:isFocusWindow
+    let l:rightFieldMinWidth += l:timeFieldWidth
+  endif
+
+  let l:statusLine = ''
+
+  if l:isFocusWindow
+    let l:statusLine .= '%1* %{FlotisableGitBranch()} '   " git branch field
+    let l:statusLine .= '%2*'                             " flag field
+  endif
+
+  let l:statusLine .= ' %w%h%r%m %y [%{&fileformat}]'     " flag field
 
   " truncate file name field if there is enough space
   if l:windowWidth > l:rightFieldMinWidth
-    let statusLine .= '%<'                              " file name field
+    let l:statusLine .= '%<'                              " file name field
   endif
 
-  let statusLine .= '%3* %f '                           " file name field
-  let statusLine .= '%='                                " seperate defferent alignment
-  let statusLine .= '%4* %.5l,%-.5c %P '                " cursor position field
-  let statusLine .= '%5* %{FlotisableDate()} '          " time field
+  let l:statusLine .= '%3* %f '                           " file name field
+  let l:statusLine .= '%='                                " seperate defferent alignment
 
-  return statusLine
+  if l:isFocusWindow
+    let l:statusLine .= '%4*'                             " cursor position field
+  endif
+
+  let l:statusLine .= ' %.5l,%-.5c %P '                   " cursor position field
+
+  if l:isFocusWindow
+    let l:statusLine .= '%5* %{FlotisableDate()} '        " time field
+  endif
+
+  return l:statusLine
 "
 endfunction
 " end set the status line
