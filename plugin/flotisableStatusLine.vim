@@ -62,25 +62,23 @@ endfunction
 " set the status line
 function! FlotisableStatusLine()
 "
-  let l:isFocusWindow = ( g:statusline_winid == win_getid() )
-
-  " file name + cursor position + time fields width
-  let l:cursorPositionWidth = 11
-  let l:timeFieldWidth      = 10
-  let l:rightFieldMinWidth  = strwidth( expand( '%:t' ) ) + l:cursorPositionWidth
-  let l:windowWidth         = winwidth( 0 )
+  let l:statusLine                = ''
+  let l:cursorPositionFieldWidth  = 11
+  let l:timeFieldWidth            = 10
+  let l:fileNameFieldWidth        = strwidth( expand( '%:t' ) )
+  let l:rightFieldMinWidth        = l:fileNameFieldWidth + l:cursorPositionFieldWidth
+  let l:windowWidth               = winwidth( 0 )
+  let l:isFocusWindow             = ( g:statusline_winid == win_getid() )
 
   if l:isFocusWindow
     let l:rightFieldMinWidth += l:timeFieldWidth
   endif
 
-  let l:statusLine = ''
-
   if l:isFocusWindow
     let l:statusLine .= '%1* %{FlotisableGitBranch()} '   " git branch field
-    let l:statusLine .= '%2*'                             " flag field
   endif
 
+  let l:statusline .= ( l:isFocusWindow ) ? '%2*': '%6*'  " flag field
   let l:statusLine .= ' %w%h%r%m %y [%{&fileformat}]'     " flag field
 
   " truncate file name field if there is enough space
@@ -90,11 +88,7 @@ function! FlotisableStatusLine()
 
   let l:statusLine .= '%3* %f '                           " file name field
   let l:statusLine .= '%='                                " seperate defferent alignment
-
-  if l:isFocusWindow
-    let l:statusLine .= '%4*'                             " cursor position field
-  endif
-
+  let l:statusline  = ( l:isFocusWindow ) ? '%4*': '%6*'  " cursor position field
   let l:statusLine .= ' %.5l,%-.5c %P '                   " cursor position field
 
   if l:isFocusWindow
