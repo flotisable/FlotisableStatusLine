@@ -4,34 +4,6 @@ endif
 
 let g:loaded_flotisableStatusLine = 1 " set flag to indicate the script is loaded
 
-" status line field color settings
-function! s:FlotisableHighlight()
-"
-  if exists( 'g:flotisableStatusLineCustomColor' )
-    return
-  endif
-
-  " color terminal color settings
-  highlight FtStatusLineGitBranch       cterm=bold  ctermfg=Green     ctermbg=DarkRed
-  highlight FtStatusLineFlag            cterm=bold  ctermfg=Blue      ctermbg=Brown
-  highlight FtStatusLineFileName        cterm=bold  ctermfg=DarkGray  ctermbg=Gray
-  highlight FtStatusLineCursorPosition  cterm=bold  ctermfg=Yellow    ctermbg=DarkGreen
-  highlight FtStatusLineTime            cterm=bold  ctermfg=White     ctermbg=DarkCyan
-  highlight FtStatusLineFaded           cterm=bold  ctermfg=Gray      ctermbg=Black
-  " end color terminal color settings
-
-  " gui color settings
-  highlight FtStatusLineGitBranch       gui=bold  guifg=#35AD42     guibg='Red'
-  highlight FtStatusLineFlag            gui=bold  guifg='DarkCyan'  guibg='Orange'
-  highlight FtStatusLineFileName        gui=bold  guifg='Gray'      guibg='LightGray'
-  highlight FtStatusLineCursorPosition  gui=bold  guifg='Yellow'    guibg='DarkGreen'
-  highlight FtStatusLineTime            gui=bold  guifg='White'     guibg=#00BFFF
-  highlight FtStatusLineFaded           gui=bold  guifg='Gray'      guibg='Black'
-  " end gui color settings
-"
-endfunction
-" end status line field color settings
-
 " get the system date information
 function! FlotisableDate()
   return strftime("%p %H:%M")
@@ -119,6 +91,20 @@ endfunction
 
 set statusline=%!FlotisableStatusLine()
 
-call s:FlotisableHighlight()
+" color terminal color settings
+highlight default FtStatusLineGitBranch       cterm=bold  ctermfg=Green     ctermbg=DarkRed
+highlight default FtStatusLineFlag            cterm=bold  ctermfg=Blue      ctermbg=Brown
+highlight default FtStatusLineFileName        cterm=bold  ctermfg=DarkGray  ctermbg=Gray
+highlight default FtStatusLineCursorPosition  cterm=bold  ctermfg=Yellow    ctermbg=DarkGreen
+highlight default FtStatusLineTime            cterm=bold  ctermfg=White     ctermbg=DarkCyan
+highlight default FtStatusLineFaded           cterm=bold  ctermfg=Gray      ctermbg=Black
+" end color terminal color settings
 
-autocmd ColorScheme * call s:FlotisableHighlight()
+" gui color settings
+highlight default FtStatusLineGitBranch       gui=bold  guifg=#35AD42     guibg='Red'
+highlight default FtStatusLineFlag            gui=bold  guifg='DarkCyan'  guibg='Orange'
+highlight default FtStatusLineFileName        gui=bold  guifg='Gray'      guibg='LightGray'
+highlight default FtStatusLineCursorPosition  gui=bold  guifg='Yellow'    guibg='DarkGreen'
+highlight default FtStatusLineTime            gui=bold  guifg='White'     guibg=#00BFFF
+highlight default FtStatusLineFaded           gui=bold  guifg='Gray'      guibg='Black'
+" end gui color settings
