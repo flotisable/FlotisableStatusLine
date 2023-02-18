@@ -6,7 +6,7 @@ a self use plugin to set up the status line fo vim
 # Index
 - [Screenshot](#screenshot)
 - [Statusline Field](#statusline-field)
-  - [Git Branch Field](#git-branch-feild)
+  - [Git Branch Field](#git-branch-field)
   - [Flag Field](#flag-field)
   - [File Name Field](#file-name-field)
   - [Cursor Position Field](#cursor-position-field)
@@ -14,20 +14,20 @@ a self use plugin to set up the status line fo vim
 - [Customize the Color of the Field](#customize-the-color-of-the-field)
 
 # Screenshot
+TUI on the left-hand side and GUI on the right-hand side
 ![screenshot](screenshot.png)
 
-# Statusline Field
-I seperate the statusline into five filed, and each field can be set to different color
+# Statusline Fields
+I seperate the statusline into five fields, and each field can be set to different color
 
-## Git Branch Filed
-this field shows the branch of git repository if the file is belong to a git repository
-
-this is based on the **git** commant
-
-so if the command is not installed or can not be used in command line, the field will be empty or will get an error message
+## Git Branch Field
+This field shows the branch of git repository for the current working directory.
+It is based on the **.git** directory layout,
+so if there is no **.git** directory the field will be empty.
+It is removed for non-focused window
 
 ## Flag Field
-this field shows the vim flag in the following order
+This field shows the vim flags in the following order
 
   1. preview
   2. help
@@ -35,36 +35,35 @@ this field shows the vim flag in the following order
   4. modified
   5. filetype
 
+It will fade out for non-focused window
+
 ## File Name Field
-this field shows the file name relative to the present working directory
+This field shows the file name relative to the current working directory
 
 ## Cursor Position Field
-this field shows the cursor position with the following format
+This field shows the cursor position with the following format
 
-  line number, column number  file percentage
+```
+<line number>,<column number>  <file percentage>
+```
+
+It will fade out for non-focused window
 
 ## Time Field
-this field shows the system time
-
-this is based on the **date** command
-
-so if the command is not installed or can not be used in command line, the field will be empty or will get an error message
+This field shows the system time.
+It is removed for non-focused window
 
 # Customize the Color of the Field
-to customize the color of the field in the vimrc
+To customize the color of the fields in vimrc,
+just add `highlight` command for the corresponding highlight group
 
-first add this line in vimrc
+The supported highlight groups are listed below
 
-```
-g:flotisableStatusLineCustomColor = 1
-```
-
-then add **highlight** command below this line
-
-the highlight group of each field is listed below
-
-  - git branch field      : User1
-  - flag field            : User2
-  - file name field       : User3
-  - cursor position field : User4
-  - time field            : User5
+| Hightlight Group            | Field                 |
+| --------------------------- | --------------------- |
+| FtStatusLineGitBranch       | git branch field      |
+| FtStatusLineFlag            | flag field            |
+| FtStatusLineFileName        | file name field       |
+| FtStatusLineCursorPosition  | cursor position field |
+| FtStatusLineTime            | time field            |
+| FtStatusLineFaded           | faded field           |
