@@ -17,6 +17,7 @@ function! s:FlotisableHighlight()
   highlight User3 cterm=bold  ctermfg=DarkGray  ctermbg=Gray      " file name field color
   highlight User4 cterm=bold  ctermfg=Yellow    ctermbg=DarkGreen " cursor position field color
   highlight User5 cterm=bold  ctermfg=White     ctermbg=DarkCyan  " time field color
+  highlight User6 cterm=bold  ctermfg=Gray      ctermbg=Black     " faded field color
   " end color terminal color settings
 
   " gui color settings
@@ -25,6 +26,7 @@ function! s:FlotisableHighlight()
   highlight User3 gui=bold  guifg='Gray'      guibg='LightGray' " file name field color
   highlight User4 gui=bold  guifg='Yellow'    guibg='DarkGreen' " cursor position field color
   highlight User5 gui=bold  guifg='White'     guibg=#00BFFF     " time field color
+  highlight User6 gui=bold  guifg='Gray'      guibg='Black'     " faded field color
   " end gui color settings
 "
 endfunction
@@ -40,7 +42,7 @@ endfunction
 function! FlotisableGitBranch()
 "
   try
-
+  "
     let gitBranch   = readfile('.git/HEAD', '', 1)[0]
     let submatches  = matchlist( gitBranch, 'refs/heads/\(.*\)' )
 
@@ -49,7 +51,7 @@ function! FlotisableGitBranch()
     else
       return submatches[1]
     endif
-
+  "
   catch
     return ''
   endtry
