@@ -21,12 +21,25 @@ function! s:FlotisableHighlight()
   " end color terminal color settings
 
   " gui color settings
-  highlight FtStatusLineGitBranch       gui=bold  guifg=#35AD42     guibg='Red'
-  highlight FtStatusLineFlag            gui=bold  guifg='DarkCyan'  guibg='Orange'
-  highlight FtStatusLineFileName        gui=bold  guifg='Gray'      guibg='LightGray'
-  highlight FtStatusLineCursorPosition  gui=bold  guifg='Yellow'    guibg='DarkGreen'
-  highlight FtStatusLineTime            gui=bold  guifg='White'     guibg=#00BFFF
-  highlight FtStatusLineFaded           gui=bold  guifg='Gray'      guibg='Black'
+  if g:colors_name == 'nord'
+  "
+    highlight FtStatusLineGitBranch       gui=bold  guifg=#8FBCBB     guibg=#BF616A
+    highlight FtStatusLineFlag            gui=bold  guifg=#88C0D0     guibg=#4C566A
+    highlight FtStatusLineFileName        gui=bold  guifg=#D8DEE9     guibg=#3B4252
+    highlight FtStatusLineCursorPosition  gui=bold  guifg=#EBCB8B     guibg=#81A1C1
+    highlight FtStatusLineTime            gui=bold  guifg=#D8DEE9     guibg=#5E81AC
+    highlight FtStatusLineFaded           gui=bold  guifg=#4C566A     guibg=#3B4252
+  "
+  else
+  "
+    highlight FtStatusLineGitBranch       gui=bold  guifg=#35AD42     guibg='Red'
+    highlight FtStatusLineFlag            gui=bold  guifg='DarkCyan'  guibg='Orange'
+    highlight FtStatusLineFileName        gui=bold  guifg='Gray'      guibg='LightGray'
+    highlight FtStatusLineCursorPosition  gui=bold  guifg='Yellow'    guibg='DarkGreen'
+    highlight FtStatusLineTime            gui=bold  guifg='White'     guibg=#00BFFF
+    highlight FtStatusLineFaded           gui=bold  guifg='Gray'      guibg='Black'
+  "
+  endif
   " end gui color settings
 "
 endfunction
